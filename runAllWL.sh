@@ -1,7 +1,9 @@
 # Run weight Learning experiments on all examples in the repository
+#!/bin/bash
+set -e
 readonly BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-readonly OTHER_EXAMPLES_DIR="${BASE_DIR}/other-examples"
-readonly PSL_EXAMPLES_DIR="${BASE_DIR}/psl-examples"
+readonly OTHER_EXAMPLES_DIR="other-examples"
+readonly PSL_EXAMPLES_DIR="psl-examples"
 readonly OUTDIR="out"
 readonly INFERRED_PREDICATES_PATH="./inferred-predicates/*"
 # if out directory not found run WL, else skip.
@@ -9,20 +11,28 @@ readonly INFERRED_PREDICATES_PATH="./inferred-predicates/*"
 declare -a WL_METHODS=("bayesian.GaussianProcessPrior -D gpp.maxiterations=50" "maxlikelihood.MaxLikelihoodMPE" "maxlikelihood.MaxPiecewisePseudoLikelihood" "search.Hyperband" "search.InitialWeightHyperband" "search.grid.ContinuousRandomGridSearch" "search.grid.GuidedRandomGridSearch" "search.grid.RandomGridSearch")
 BASE_WEIGHT_NAME='org.linqs.psl.application.learning.weight.'
 
-for dataset in */ ; do # for all datasets i.e examples
+echo "Beginning Weight Learning experiments. Begin fresh experiments? (Press: y) \n(Delete all output directory and files). Default: Continue from cached output"
+read setclear
+if [[ $setclear = "y" ]] ; then
+    find . -type d -name "out" -exec rm -rf {} +
+fi
+
+for dataset_dir in ./$OTHER_EXAMPLES_DIR/*; do # for all datasets i.e examples
+    dataset=$(echo $dataset_dir | cut -d/ -f3)
+    echo "dataset dir" $dataset_dir "dataset" $dataset
     for split in {0..4}; do # for all splits
         # create eval.data file from template 
-        if [[ ! -e "$OTHER_EXAMPLES_DIR/$dataset/psl-cli/${dataset}-${split}-eval.data" ]]; then
-            sed "s/__fold__/$split/g" "$OTHER_EXAMPLES_DIR/$dataset/psl-cli/${dataset}-template-eval.data" > "$OTHER_EXAMPLES_DIR/$dataset/psl-cli/${dataset}-${split}-eval.data"
+        if [[ ! -e "$dataset_dir/psl-cli/${dataset}-${split}-eval.data" ]]; then
+            sed "s/__fold__/$split/g" "$dataset_dir/psl-cli/${dataset}-template-eval.data" > "$dataset_dir/psl-cli/${dataset}-${split}-eval.data"
         fi
         # create learn.data file from template
-            if [[ ! -e "$OTHER_EXAMPLES_DIR/$dataset/psl-cli/${dataset}-${split}-learn.data" ]]; then
-                sed "s/__fold__/$split/g" "$OTHER_EXAMPLES_DIR/$dataset/psl-cli/${dataset}-template-learn.data" > "$OTHER_EXAMPLES_DIR/$dataset/psl-cli/${dataset}-${split}-learn.data"
+            if [[ ! -e "$dataset_dir/psl-cli/${dataset}-${split}-learn.data" ]]; then
+                sed "s/__fold__/$split/g" "$dataset_dir/psl-cli/${dataset}-template-learn.data" > "$dataset_dir/psl-cli/${dataset}-${split}-learn.data"
             fi
         # make logs dir
         mkdir -p "${OTHER_EXAMPLES_DIR}/${dataset}/$OUTDIR"
         pushd . > /dev/null
-        cd "$OTHER_EXAMPLES_DIR/$dataset/psl-cli/"
+        cd "$dataset_dir/psl-cli/"
         # comment weight learning. sed -i doesnt work on mac
         sed  's/runWeightLearning "$@"/# runWeightLearning/' run.sh > runtemp.sh ; mv runtemp.sh run.sh
         #run uniform on eval
