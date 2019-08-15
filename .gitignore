@@ -1,2 +1,12 @@
 **/.DS_Store
 *.swp
+__pycache__/
+*.zip
+*.tar.gz
+
+out/
+*.jar
+*-learned.psl
+out*.txt
+out*.err
+inferred-predicates/
