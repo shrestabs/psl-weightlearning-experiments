@@ -5,7 +5,7 @@ readonly BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && p
 readonly OTHER_EXAMPLES_DIR="other-examples"
 readonly PSL_EXAMPLES_DIR="psl-examples"
 readonly OUTDIR="out"
-readonly INFERRED_PREDICATES_PATH="./inferred-predicates/*"
+readonly INFERRED_PREDICATES_DIR="inferred-predicates"
 # if out directory not found run WL, else skip.
 
 # Debug fucntion for testing the script w.r.t new file creation and deletion
@@ -15,16 +15,16 @@ emulate_psl()
     wl_method=$1    # uniform is 1 wl is 2
     dataset=$2
     split=$3
-    sleep 1s    #  assuming WL or infernce takes 2 seconds
+    #sleep 1s    #  uncomment to for a natural emulation WL/infernce takes these seconds
     if [[ $wl_method != "uniform" ]]; then
         touch "${dataset}-learned.psl"
     fi
 
     touch "../$OUTDIR/${dataset}-${split}-${wl_method}-out.txt"
     touch "../$OUTDIR/${dataset}-${split}-${wl_method}-err.txt"
-    if [[ ! -d inferred-predicates ]] ; then
-        mkdir inferred-predicates
-        touch inferred-predicates/dummypredicate.txt
+    if [[ ! -d $INFERRED_PREDICATES_DIR ]] ; then
+        mkdir -p inferred-predicates
+        touch $INFERRED_PREDICATES_DIR/dummypredicate.txt
     fi
 }
 
@@ -35,8 +35,9 @@ BASE_WEIGHT_NAME='org.linqs.psl.application.learning.weight.'
 # printf instead of echo for consitent \n print(mac/ubunutu)
 printf "Beginning Weight Learning experiments. Ensure you have changed run script for java heap size and time command. \nBegin fresh experiments? (Press: y) \n(Delete all output directory and files). Default: Continue from cached output\n"
 read setclear
-if [[ $setclear = "y" ]] ; then
-    find . -type d -name "out" -exec rm -rf {} +
+if [[ $setclear = "yes" ]] ; then
+    find . -type d -name "$OUTDIR" -exec rm -rf {} +
+    find . -type d -name "$INFERRED_PREDICATES_DIR" -exec rm -rf {} +
     rm -f "$OTHER_EXAMPLES_DIR/$dataset/psl-cli/${dataset}-eval.data"
     rm -f "$OTHER_EXAMPLES_DIR/$dataset/psl-cli/${dataset}-learn.data"
 fi
@@ -74,11 +75,11 @@ for dataset_dir in ./$OTHER_EXAMPLES_DIR/*; do # for all datasets i.e examples
             # uncomment weight learning
             sed 's/# runWeightLearning/runWeightLearning "$@"/' run.sh > runtemp.sh ; mv runtemp.sh run.sh
             chmod 755 run.sh
-            rm ${dataset}-learned.psl
-            for this_inferred_predicate in "$INFERRED_PREDICATES_PATH" ; do
+            for this_inferred_predicate in "./$INFERRED_PREDICATES_DIR/*" ; do
                 predicate_file=$(echo $this_inferred_predicate | cut -d/ -f3)
                 cp $this_inferred_predicate "../$OUTDIR/${dataset}-${split}-uniform-inferred-${predicate_file%%}"
             done
+            rm ${dataset}-learned.psl
         fi
 
         # for all weight learning methods
@@ -98,7 +99,7 @@ for dataset_dir in ./$OTHER_EXAMPLES_DIR/*; do # for all datasets i.e examples
             # backup the -learned.psl to out directory with WL method suffixed.
             cp "${dataset}-learned.psl" "../out/${dataset}-${split}-${wl_method}-learned.psl"
             # backup the inferred predicates/predicate.txt to out directory with WL method suffixed. 
-            for this_inferred_predicate in "$INFERRED_PREDICATES_PATH" ; do
+            for this_inferred_predicate in "./$INFERRED_PREDICATES_DIR/*" ; do
                 predicate_file=$(echo $this_inferred_predicate | cut -d/ -f3)
                 cp $this_inferred_predicate "../$OUTDIR/${dataset}-${split}-${wl_method}-inferred-${predicate_file%%}"
             done
