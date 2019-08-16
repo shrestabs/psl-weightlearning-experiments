@@ -69,8 +69,8 @@ for dataset_dir in ./$OTHER_EXAMPLES_DIR/*; do # for all datasets i.e examples
             chmod 755 run.sh
             # create a uniform weighted psl file 
             cp ${dataset}.psl ${dataset}-learned.psl
-            #sh ./run.sh --postgres ${DEFAULT_POSTGRES_DB} -D log4j.threshold=DEBUG > "../$OUTDIR/${dataset}-${split}-uniform-out.txt" 2> "../$OUTDIR/${dataset}-${split}-uniform-err.txt"
-            emulate_psl "uniform" $dataset $split $wl_method
+            ./run.sh --postgres ${DEFAULT_POSTGRES_DB} -D log4j.threshold=DEBUG > "../$OUTDIR/${dataset}-${split}-uniform-out.txt" 2> "../$OUTDIR/${dataset}-${split}-uniform-err.txt"
+            #emulate_psl "uniform" $dataset $split $wl_method
             # uncomment weight learning
             sed 's/# runWeightLearning/runWeightLearning "$@"/' run.sh > runtemp.sh ; mv runtemp.sh run.sh
             chmod 755 run.sh
@@ -92,8 +92,8 @@ for dataset_dir in ./$OTHER_EXAMPLES_DIR/*; do # for all datasets i.e examples
                 echo "Output file already exists, skipping: $wl_method on $split on $dataset"
             else
                 echo "--Running example: $wl_method on $split on $dataset"
-                sh ./run.sh --postgres ${DEFAULT_POSTGRES_DB} -D log4j.threshold=DEBUG > "../$OUTDIR/${dataset}-${split}-${wl_method}-out.txt" 2> "../$OUTDIR/${dataset}-${split}-${wl_method}-err.txt"
-                emulate_psl $wl_method $dataset $split
+                ./run.sh --postgres ${DEFAULT_POSTGRES_DB} -D log4j.threshold=DEBUG > "../$OUTDIR/${dataset}-${split}-${wl_method}-out.txt" 2> "../$OUTDIR/${dataset}-${split}-${wl_method}-err.txt"
+                #emulate_psl $wl_method $dataset $split
             fi
             # backup the -learned.psl to out directory with WL method suffixed.
             cp "${dataset}-learned.psl" "../out/${dataset}-${split}-${wl_method}-learned.psl"

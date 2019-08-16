@@ -21,9 +21,9 @@ predicates:
     rating/2: open
 
 observations:
-    user: ../data/lastfm/__fold__/eval/users_obs.txt
-    item: ../data/lastfm/__fold__/eval/items_obs.txt
-    users_are_friends: ../data/lastfm/__fold__/eval/friends_obs.txt
+    user: ../data/lastfm/__fold__/eval/user_obs.txt
+    item: ../data/lastfm/__fold__/eval/item_obs.txt
+    users_are_friends: ../data/lastfm/__fold__/eval/users_are_friends_obs.txt
     sim_content_items_jaccard: ../data/lastfm/__fold__/eval/sim_content_items_jaccard_obs.txt    
 
     sim_pearson_items: ../data/lastfm/__fold__/eval/sim_pearson_items_obs.txt
