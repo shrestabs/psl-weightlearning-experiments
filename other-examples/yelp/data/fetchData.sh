@@ -10,7 +10,7 @@ function main() {
    check_requirements
 
    fetch_file "${DATA_URL}" "${DATA_FILE}" 'data'
-   extract_tar "${DATA_FILE}" "${DATA_DIR}" 'data'
+   extract_zip "${DATA_FILE}" "${DATA_DIR}" 'data'
 }
 
 function check_requirements() {
