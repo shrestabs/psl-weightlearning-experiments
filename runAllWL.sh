@@ -66,14 +66,14 @@ for dataset_dir in ./$OTHER_EXAMPLES_DIR/*; do # for all datasets i.e examples
         else
             echo "--Running example: ${dataset}-uniform"
             # comment weight learning. sed -i doesnt work on mac
-            sed  's/runWeightLearning "$@"/# runWeightLearning/' run.sh > runtemp.sh ; mv runtemp.sh run.sh
+            sed  's/runWeightLearning "$@"/# runWeightLearning/g' run.sh > runtemp.sh ; mv runtemp.sh run.sh
             chmod 755 run.sh
             # create a uniform weighted psl file 
             cp ${dataset}.psl ${dataset}-learned.psl
-            ./run.sh --postgres ${DEFAULT_POSTGRES_DB} -D log4j.threshold=DEBUG > "../$OUTDIR/${dataset}-${split}-uniform-out.txt" 2> "../$OUTDIR/${dataset}-${split}-uniform-err.txt"
+            ./run.sh --postgres psl  -D log4j.threshold=DEBUG > "../$OUTDIR/${dataset}-${split}-uniform-out.txt" 2> "../$OUTDIR/${dataset}-${split}-uniform-err.txt"
             #emulate_psl "uniform" $dataset $split $wl_method
             # uncomment weight learning
-            sed 's/# runWeightLearning/runWeightLearning "$@"/' run.sh > runtemp.sh ; mv runtemp.sh run.sh
+            sed 's/# runWeightLearning.*/runWeightLearning "$@"/g' run.sh > runtemp.sh ; mv runtemp.sh run.sh
             chmod 755 run.sh
             for this_inferred_predicate in "./$INFERRED_PREDICATES_DIR/*" ; do
                 predicate_file=$(echo $this_inferred_predicate | cut -d/ -f3)
@@ -86,14 +86,14 @@ for dataset_dir in ./$OTHER_EXAMPLES_DIR/*; do # for all datasets i.e examples
         for wl_method in "${WL_METHODS[@]}" ; do
             echo "Running $wl_method on $split on $dataset"
             # replace weight learning method
-            sed "s/readonly ADDITIONAL_LEARN_OPTIONS='--learn'/readonly ADDITIONAL_LEARN_OPTIONS='--learn ${BASE_WEIGHT_NAME}${wl_method}'/" run.sh > runtemp.sh ; mv runtemp.sh run.sh
+            sed "s/readonly ADDITIONAL_LEARN_OPTIONS='--learn.*'/readonly ADDITIONAL_LEARN_OPTIONS='--learn ${BASE_WEIGHT_NAME}${wl_method}'/g" run.sh > runtemp.sh ; mv runtemp.sh run.sh
             chmod 755 run.sh
             # run weight learning and eval with ./run.sh
             if [[ -e "../$OUTDIR/${dataset}-${split}-${wl_method}-out.txt" ]]; then
                 echo "Output file already exists, skipping: $wl_method on $split on $dataset"
             else
                 echo "--Running example: $wl_method on $split on $dataset"
-                ./run.sh --postgres ${DEFAULT_POSTGRES_DB} -D log4j.threshold=DEBUG > "../$OUTDIR/${dataset}-${split}-${wl_method}-out.txt" 2> "../$OUTDIR/${dataset}-${split}-${wl_method}-err.txt"
+                ./run.sh --postgres psl  -D log4j.threshold=DEBUG > "../$OUTDIR/${dataset}-${split}-${wl_method}-out.txt" 2> "../$OUTDIR/${dataset}-${split}-${wl_method}-err.txt"
                 #emulate_psl $wl_method $dataset $split
             fi
             # backup the -learned.psl to out directory with WL method suffixed.
