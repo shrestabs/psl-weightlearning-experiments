@@ -66,14 +66,14 @@ for dataset_dir in ./$OTHER_EXAMPLES_DIR/*; do # for all datasets i.e examples
         else
             echo "--Running example: ${dataset}-uniform"
             # comment weight learning. sed -i doesnt work on mac
-            sed  's/runWeightLearning "$@"/# runWeightLearning/g' run.sh > runtemp.sh ; mv runtemp.sh run.sh
+            sed  's/runWeightLearning "$@".*/# runWeightLearning "$@"/g' run.sh > runtemp.sh ; mv runtemp.sh run.sh
             chmod 755 run.sh
             # create a uniform weighted psl file 
             cp ${dataset}.psl ${dataset}-learned.psl
             ./run.sh --postgres psl  -D log4j.threshold=DEBUG > "../$OUTDIR/${dataset}-${split}-uniform-out.txt" 2> "../$OUTDIR/${dataset}-${split}-uniform-err.txt"
             #emulate_psl "uniform" $dataset $split $wl_method
             # uncomment weight learning
-            sed 's/# runWeightLearning.*/runWeightLearning "$@"/g' run.sh > runtemp.sh ; mv runtemp.sh run.sh
+            sed 's/# runWeightLearning "$@".*/runWeightLearning "$@"/g' run.sh > runtemp.sh ; mv runtemp.sh run.sh
             chmod 755 run.sh
             for this_inferred_predicate in "./$INFERRED_PREDICATES_DIR/*" ; do
                 predicate_file=$(echo $this_inferred_predicate | cut -d/ -f3)
