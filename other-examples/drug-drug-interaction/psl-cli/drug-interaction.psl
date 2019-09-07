@@ -1,0 +1,14 @@
+
+5.0: ATCSimilarity(D1, D2) & interacts(D1, D3) & validInteraction(D2, D3) & (D2 != D3) & (D1 != D2) >> interacts(D2, D3)^2
+5.0: SideEffectSimilarity(D1, D2) & interacts(D1, D3) & validInteraction(D2, D3) & (D2 != D3) & (D1 != D2) >> interacts(D2, D3)^2
+5.0: GOSimilarity(D1, D2)  & interacts(D1, D3) & validInteraction(D2, D3) & (D2 != D3) & (D1 != D2) >> interacts(D2, D3)^2
+5.0: ligandSimilarity(D1, D2) & interacts(D1, D3) & validInteraction(D2, D3) & (D2 != D3) & (D1 != D2) >> interacts(D2, D3)^2
+5.0: chemicalSimilarity(D1, D2) & interacts(D1, D3) & validInteraction(D2, D3) & (D2 != D3) & (D1 != D2) >> interacts(D2, D3)^2
+5.0: seqSimilarity(D1, D2) & interacts(D1, D3) & validInteraction(D2, D3) & (D2 != D3) & (D1 != D2) >> interacts(D2, D3)^2
+5.0: distSimilarity(D1, D2) & interacts(D1, D3) & validInteraction(D2, D3) & (D2 != D3) & (D1 != D2) >> interacts(D2, D3)^2
+
+
+
+5.0: validInteraction(D1, D2) >> !interacts(D1, D2)
+
+interacts(D1, D2) = interacts(D2, D1) .

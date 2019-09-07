@@ -1,0 +1,29 @@
+predicates:
+   ATCSimilarity/2: closed
+   SideEffectSimilarity/2: closed
+   GOSimilarity/2: closed
+   ligandSimilarity/2: closed
+   chemicalSimilarity/2: closed
+   seqSimilarity/2: closed
+   distSimilarity/2: closed
+   validInteraction/2: closed
+   interacts/2: open
+
+observations:
+   ATCSimilarity: ../data/eval/atcsimilarityblock.txt
+   SideEffectSimilarity: ../data/eval/sideeffectsimilarityblock.txt
+   GOSimilarity: ../data/eval/gosimilarityblock.txt
+   ligandSimilarity: ../data/eval/ligandsimilarityblock.txt
+   chemicalSimilarity: ../data/eval/chemicalsimilarityblock.txt
+   seqSimilarity: ../data/eval/seqsimilarityblock.txt
+   distSimilarity: ../data/eval/distsimilarityblock.txt
+   validInteraction: ../data/eval/validInteractions.txt
+   interacts: ../data/eval/interacts_obs.txt
+
+
+targets:
+   interacts: ../data/eval/interacts_target.txt
+
+truth:
+   interacts: ../data/eval/interacts_truth.txt
+
