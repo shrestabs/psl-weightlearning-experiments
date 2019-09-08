@@ -4,10 +4,10 @@
 readonly PSL_VERSION='2.2.0-SNAPSHOT'
 readonly JAR_PATH="./psl-cli-${PSL_VERSION}.jar"
 readonly FETCH_DATA_SCRIPT='../data/fetchData.sh'
-readonly BASE_NAME='drug-interaction'
+readonly BASE_NAME='drug-drug-interaction'
 
 readonly ADDITIONAL_PSL_OPTIONS='--postgres psl -D log4j.threshold=DEBUG'
-readonly ADDITIONAL_LEARN_OPTIONS='--learn MaxLikelihoodMPE'
+readonly ADDITIONAL_LEARN_OPTIONS='--learn org.linqs.psl.application.learning.weight.search.grid.RandomGridSearch'
 readonly ADDITIONAL_EVAL_OPTIONS='--infer --eval org.linqs.psl.evaluation.statistics.RankingEvaluator'
 
 function main() {
@@ -21,7 +21,7 @@ function main() {
    fetch_psl
 
    # Run PSL
-   runWeightLearning "$@"
+   # runWeightLearning "$@"
    runEvaluation "$@"
 }
 

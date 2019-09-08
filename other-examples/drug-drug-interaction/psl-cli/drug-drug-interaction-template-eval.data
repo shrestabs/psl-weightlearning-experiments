@@ -1,0 +1,27 @@
+predicates:
+   ATCSimilarity/2: closed
+   SideEffectSimilarity/2: closed
+   GOSimilarity/2: closed
+   ligandSimilarity/2: closed
+   chemicalSimilarity/2: closed
+   seqSimilarity/2: closed
+   distSimilarity/2: closed
+   validInteraction/2: closed
+   interacts/2: open
+
+observations:
+   ATCSimilarity: ../data/drug-drug-interaction/__fold__/eval/atcsimilarityblock.txt
+   SideEffectSimilarity: ../data/drug-drug-interaction/__fold__/eval/sideeffectsimilarityblock.txt
+   GOSimilarity: ../data/drug-drug-interaction/__fold__/eval/gosimilarityblock.txt
+   ligandSimilarity: ../data/drug-drug-interaction/__fold__/eval/ligandsimilarityblock.txt
+   chemicalSimilarity: ../data/drug-drug-interaction/__fold__/eval/chemicalsimilarityblock.txt
+   seqSimilarity: ../data/drug-drug-interaction/__fold__/eval/seqsimilarityblock.txt
+   distSimilarity: ../data/drug-drug-interaction/__fold__/eval/distsimilarityblock.txt
+   validInteraction: ../data/drug-drug-interaction/__fold__/eval/validInteractions.txt
+   interacts: ../data/drug-drug-interaction/__fold__/eval/interacts_obs.txt
+
+targets:
+   interacts: ../data/drug-drug-interaction/__fold__/eval/interacts_target.txt
+
+truth:
+   interacts: ../data/drug-drug-interaction/__fold__/eval/interacts_truth.txt
