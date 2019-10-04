@@ -7,10 +7,10 @@
 readonly PSL_VERSION='2.2.0-SNAPSHOT'
 readonly JAR_PATH="./psl-cli-${PSL_VERSION}.jar"
 readonly FETCH_DATA_SCRIPT='../data/fetchData.sh'
-readonly BASE_NAME='lastfm'
+readonly BASE_NAME='yelp'
 
 readonly ADDITIONAL_PSL_OPTIONS=''
-readonly ADDITIONAL_LEARN_OPTIONS='--learn org.linqs.psl.application.learning.weight.bayesian.GaussianProcessPrior'
+readonly ADDITIONAL_LEARN_OPTIONS='--learn org.linqs.psl.application.learning.weight.abc'
 readonly ADDITIONAL_EVAL_OPTIONS='--infer --eval org.linqs.psl.evaluation.statistics.ContinuousEvaluator' 
 
 function main() {
@@ -24,7 +24,7 @@ function main() {
    fetch_psl
 
    # Run PSL
-   runWeightLearning "$@"
+   # runWeightLearning "$@"
    runEvaluation "$@"
 }
 

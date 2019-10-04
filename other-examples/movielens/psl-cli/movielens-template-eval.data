@@ -1,0 +1,81 @@
+predicates:
+    rating/2: closed
+    rated/2: closed
+    rating_prior/1: closed
+    rating_prior_genre1/1: closed
+    rating_prior_genre2/1: closed
+    rating_prior_genre3/1: closed
+    rating_prior_genre4/1: closed
+    rating_prior_genre5/1: closed
+    rating_prior_gender0/1: closed
+    rating_prior_gender1/1: closed
+    item_belongs_to_genre1/1: closed
+    item_belongs_to_genre2/1: closed
+    item_belongs_to_genre3/1: closed
+    item_belongs_to_genre4/1: closed
+    item_belongs_to_genre5/1: closed
+    user_belongs_to_gender0/1: closed
+    user_belongs_to_gender1/1: closed
+    sim_cosine_items/2: closed
+    sim_content_items/2: closed
+    sim_pearson_items/2: closed
+    sim_adj_cosine_items/2: closed
+    sim_cosine_users/2: closed
+    sim_pearson_users/2: closed
+    sim_demo_users/2: closed
+    avg_user_rating/1: closed
+    avg_item_rating/1: closed
+    is_male/1: closed
+    genre/2: closed
+    female_movie_rating/1: closed
+    male_movie_rating/1: closed
+    female_genre_rating/1: closed
+    male_genre_rating/1: closed
+    female_genre_movie_rating/2: closed
+    male_genre_movie_rating/2: closed
+    bmf_rating/2 : closed
+    mf_rating/2 : closed
+    svg_rating/2: closed
+    
+oberservations:
+    rating: ../data/movielens/__fold__/eval/rating_obs.txt
+    rated: ../data/movielens/__fold__/eval/rated_obs.txt
+    rating_prior: ../data/movielens/__fold__/eval/rating_prior_obs.txt
+    rating_prior_genre1: ../data/movielens/__fold__/eval/rating_prior_genre1_obs.txt
+    rating_prior_genre2: ../data/movielens/__fold__/eval/rating_prior_genre2_obs.txt
+    rating_prior_genre3: ../data/movielens/__fold__/eval/rating_prior_genre3_obs.txt
+    rating_prior_genre4: ../data/movielens/__fold__/eval/rating_prior_genre4_obs.txt
+    rating_prior_genre5: ../data/movielens/__fold__/eval/rating_prior_genre5_obs.txt
+    rating_prior_gender0: ../data/movielens/__fold__/eval/rating_prior_gender0_obs.txt
+    rating_prior_gender1: ../data/movielens/__fold__/eval/rating_prior_gender1_obs.txt
+    item_belongs_to_genre1: ../data/movielens/__fold__/eval/item_belongs_to_genre1_obs.txt
+    item_belongs_to_genre2: ../data/movielens/__fold__/eval/item_belongs_to_genre2_obs.txt
+    item_belongs_to_genre3: ../data/movielens/__fold__/eval/item_belongs_to_genre3_obs.txt
+    item_belongs_to_genre4: ../data/movielens/__fold__/eval/item_belongs_to_genre4_obs.txt
+    item_belongs_to_genre5: ../data/movielens/__fold__/eval/item_belongs_to_genre5_obs.txt
+    user_belongs_to_gender0: ../data/movielens/__fold__/eval/user_belongs_to_gender0_obs.txt
+    user_belongs_to_gender1: ../data/movielens/__fold__/eval/user_belongs_to_gender1_obs.txt
+    sim_cosine_items: ../data/movielens/__fold__/eval/sim_cosine_items_obs.txt
+    sim_content_items: ../data/movielens/__fold__/eval/sim_content_items_obs.txt
+    sim_pearson_items: ../data/movielens/__fold__/eval/sim_pearson_items_obs.txt
+    sim_adj_cosine_items: ../data/movielens/__fold__/eval/sim_adj_cosine_items_obs.txt
+    sim_cosine_users: ../data/movielens/__fold__/eval/sim_cosine_users_obs.txt
+    sim_pearson_users: ../data/movielens/__fold__/eval/sim_pearson_users_obs.txt
+    sim_demo_users: ../data/movielens/__fold__/eval/sim_demo_users_obs.txt
+    avg_user_rating: ../data/movielens/__fold__/eval/avg_user_rating_obs.txt
+    avg_item_rating: ../data/movielens/__fold__/eval/avg_item_rating_obs.txt
+    is_male: ../data/movielens/__fold__/eval/is_male_obs.txt
+    genre: ../data/movielens/__fold__/eval/genre_obs.txt
+    female_movie_rating: ../data/movielens/__fold__/eval/female_movie_rating_obs.txt
+    male_movie_rating: ../data/movielens/__fold__/eval/male_movie_rating_obs.txt
+    female_genre_rating: ../data/movielens/__fold__/eval/female_genre_rating_obs.txt
+    male_genre_rating: ../data/movielens/__fold__/eval/female_genre_rating_obs.txt
+    female_genre_movie_rating: ../data/movielens/__fold__/eval/female_genre_movie_rating_obs.txt
+    male_genre_movie_rating: ../data/movielens/__fold__/eval/male_genre_movie_rating_obs.txt
+    bmf_rating : ../data/movielens/__fold__/eval/bmf_rating_obs.txt
+    mf_rating : ../data/movielens/__fold__/eval/mf_rating_obs.txt
+    svg_rating: ../data/movielens/__fold__/eval/svg_rating_obs.txt
+
+targets:
+
+truth:

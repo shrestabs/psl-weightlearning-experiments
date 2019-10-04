@@ -1,0 +1,15 @@
+predicates:
+  Trusts/2: open
+  Knows/2: closed
+  Prior/1: closed
+
+observations:
+  Trusts: data/splits/__fold__/learn/trusts_obs.txt
+  Knows: data/splits/__fold__/learn/knows_obs.txt
+  Prior: data/splits/__fold__/learn/prior_obs.txt
+
+targets:
+  Trusts: data/splits/__fold__/learn/trusts_target.txt
+
+truth:
+  Trusts: data/splits/__fold__/learn/trusts_truth.txt

@@ -1,0 +1,23 @@
+predicates:
+   AvgJokeRatingObs/1: closed
+   AvgUserRatingObs/1: closed
+   Joke/1: closed
+   RatingPrior/1: closed
+   SimObsRating/2: closed
+   User/1: closed
+   Rating/2: open
+
+observations:
+   AvgJokeRatingObs: data/splits/__fold__/learn/avgJokeRatingObs_obs.txt
+   AvgUserRatingObs: data/splits/__fold__/learn/avgUserRatingObs_obs.txt
+   Joke: data/splits/__fold__/learn/joke_obs.txt
+   RatingPrior: data/splits/__fold__/learn/ratingPrior_obs.txt
+   SimObsRating: data/splits/__fold__/learn/simObsRating_obs.txt
+   User: data/splits/__fold__/learn/user_obs.txt
+   Rating: data/splits/__fold__/learn/rating_obs.txt
+
+targets:
+   Rating: data/splits/__fold__/learn/rating_targets.txt
+
+truth:
+   Rating: data/splits/__fold__/learn/rating_truth.txt

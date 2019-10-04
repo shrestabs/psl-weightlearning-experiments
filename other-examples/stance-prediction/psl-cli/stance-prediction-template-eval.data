@@ -1,0 +1,21 @@
+predicates:
+    participates/2: closed
+    localPro/2: closed
+    localDisagrees/2: closed
+    responds/2: closed
+    isProAuth/2: open 
+    disagrees/2: open
+
+observations:
+    participates: ../data/stance-prediction/__fold__/eval/participates_obs.txt
+    localPro: ../data/stance-prediction/__fold__/eval/localPro_obs.txt
+    localDisagrees: ../data/stance-prediction/__fold__/eval/localDisagrees_obs.txt
+    responds: ../data/stance-prediction/__fold__/eval/responds_obs.txt
+
+targets:
+    isProAuth: ../data/stance-prediction/__fold__/eval/isProAuth_targets.txt
+    disagrees: ../data/stance-prediction/__fold__/eval/disagrees_targets.txt
+
+truth:
+    isProAuth: ../data/stance-prediction/__fold__/eval/isProAuth_truth.txt
+    disagrees: ../data/stance-prediction/__fold__/eval/disagrees_truth.txt
